@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "todo-app" {
-  bucket = var.bucket_name
+  bucket        = var.bucket_name
   force_destroy = true
 
   tags = {
@@ -27,21 +27,15 @@ resource "aws_s3_bucket_website_configuration" "todo-app-web-config" {
   error_document {
     key = "error.html"
   }
-
-}
-
-resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
-  bucket = aws_s3_bucket.todo-app.id
-  policy = data.aws_iam_policy_document.allow_access_from_another_account.json
 }
 
 data "aws_iam_policy_document" "allow_access_from_another_account" {
-    statement {
-    sid = "1"
+  statement {
+    sid    = "1"
     effect = "Allow"
 
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = ["*"]
     }
 
@@ -49,6 +43,8 @@ data "aws_iam_policy_document" "allow_access_from_another_account" {
       "s3:GetObject",
     ]
 
-    resources = ["${aws_s3_bucket.todo-app.arn}/*",]
+    resources = [
+      "${aws_s3_bucket.todo-app.arn}/*",
+    ]
   }
 }
