@@ -1,0 +1,1 @@
+bucket_name = "github_actions_janni"
