@@ -1,1 +1,1 @@
-bucket_name = "github_actions_janni"
+bucket_name = "github-actions-janni"

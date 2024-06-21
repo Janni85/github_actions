@@ -11,5 +11,5 @@ terraform {
 provider "aws" {
   region = "eu-central-1"
   shared_credentials_files = ["./credentials"]
-  profile                  = "Student"
+  profile                  = "081779477475_Student"
 }
