@@ -78,6 +78,6 @@ data "aws_iam_policy_document" "allow_access_from_another_account" {
 resource "aws_s3_object" "object" {
   bucket = aws_s3_bucket.todo-app.id
   key    = "index.html"
-  source = "../dist/*"
+  source = "../dist/index.html"
   content_type = "text/html"
 }
