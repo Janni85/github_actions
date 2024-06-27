@@ -8,6 +8,13 @@ resource "aws_s3_bucket" "todo-app" {
   }
 }
 
+resource "aws_s3_bucket_versioning" "versioning_s3" {
+  bucket = aws_s3_bucket.todo-app.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "todo-app-bucket-policy" {
   bucket = aws_s3_bucket.todo-app.id
 
