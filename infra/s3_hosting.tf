@@ -82,5 +82,5 @@ resource "aws_s3_object" "object" {
 
   key    = each.value
   source = "../dist/${each.value}"
-  content_type = each.value
+  content_type = lookup(var.mime_types, regex("[.][^.]+$", each.value), "application/octet-stream")
 }
