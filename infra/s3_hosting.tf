@@ -54,6 +54,7 @@ resource "aws_s3_bucket_website_configuration" "todo-app-web-config" {
 resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
   bucket = aws_s3_bucket.todo-app.id
   policy = data.aws_iam_policy_document.allow_access_from_another_account.json
+  depends_on = [aws_s3_bucket_public_access_block.todo-app-bucket-policy]
 }
 
 data "aws_iam_policy_document" "allow_access_from_another_account" {
@@ -72,4 +73,11 @@ data "aws_iam_policy_document" "allow_access_from_another_account" {
 
     resources = ["${aws_s3_bucket.todo-app.arn}/*",]
   }
+}
+
+resource "aws_s3_object" "object" {
+  bucket = aws_s3_bucket.todo-app.id
+  key    = "index.html"
+  source = "../dist/*"
+  content_type = "text/html"
 }
